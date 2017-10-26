@@ -4,6 +4,7 @@
 using namespace std;
 class FloydAlgorithm
 {
+	void allocate_helper_matrix(vector<vector<int>>&  matrix);
 	vector<vector<int>> W_prev;
 	vector<vector<int>> W_next;
 	vector<vector<int>> theta_prev;
@@ -12,8 +13,10 @@ class FloydAlgorithm
 public:
 	FloydAlgorithm(Graph graph);
 	void form_initial_W(Graph& graph);
-	void form_initial_theta();
+	void form_initial_theta(vector<vector<int>>& theta);
 	void printMatrix(vector<vector<int>>& matrix);
+	void algorithm();
+	void k_th_iteration(int k);
 	vector<vector<int>> get_W();
 	vector<vector<int>> get_theta();
 	~FloydAlgorithm();

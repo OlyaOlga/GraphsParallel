@@ -36,5 +36,10 @@ void main()
 	algorithm.printMatrix(algorithm.get_W());
 	cout << endl;
 	algorithm.printMatrix(algorithm.get_theta());
+	algorithm.algorithm();
+	cout << endl<<endl;
+	algorithm.printMatrix(algorithm.get_W());
+	cout << endl;
+	algorithm.printMatrix(algorithm.get_theta());
 	system("pause");
 }
