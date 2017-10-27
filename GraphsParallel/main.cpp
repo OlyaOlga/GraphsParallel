@@ -27,19 +27,25 @@ void Dijkstra()
 	system("pause");
 }
 
+void Floyd()
+{
+	Graph gr(100);
+	cout << "Floyd:" << endl;
+	FloydAlgorithm algorithm(gr);
+	int time = clock();
+	algorithm.parallel_algorithm();
+	int another_time = clock();
+	cout << "parallel: " << another_time - time << endl;
+	cout << endl;
+	FloydAlgorithm sucsessive(gr);
+	time = clock();
+	sucsessive.algorithm();
+	another_time = clock();
+	cout << "not parallel: " << another_time - time << endl;
+	system("pause");
+}
+
 void main()
 {
-	Graph gr;
-	fstream file("Floyd.txt");
-	file >> gr;
-	FloydAlgorithm algorithm(gr);
-	algorithm.printMatrix(algorithm.get_W());
-	cout << endl;
-	algorithm.printMatrix(algorithm.get_theta());
-	algorithm.algorithm();
-	cout << endl<<endl;
-	algorithm.printMatrix(algorithm.get_W());
-	cout << endl;
-	algorithm.printMatrix(algorithm.get_theta());
-	system("pause");
+	
 }

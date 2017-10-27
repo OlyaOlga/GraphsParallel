@@ -1,5 +1,7 @@
-#include "FloydAlgorithm.h"
 #include <iostream>
+#include<thread>
+#include<future>
+#include "FloydAlgorithm.h"
 
 void FloydAlgorithm::allocate_helper_matrix(vector<vector<int>>& matrix)
 {
@@ -78,16 +80,14 @@ void FloydAlgorithm::algorithm()
 	{
 		k_th_iteration(k);
 		W_prev = W_next;
-		cout << "k:" << k << endl;
-		printMatrix(W_prev);
-		cout << endl;
 		theta_prev = theta_next;
 	}
 }
 
-void FloydAlgorithm::k_th_iteration(int k)
+
+void FloydAlgorithm::k_th_iteration(int k, int from, int to)
 {
-	for (int i = 0; i < quantity_of_vertices; ++i)
+	for (int i = from; i < to; ++i)
 	{
 		for (int j = 0; j < quantity_of_vertices; ++j)
 		{
@@ -113,6 +113,35 @@ void FloydAlgorithm::k_th_iteration(int k)
 				theta_next[i][j] = theta_prev[i][j];
 			}
 		}
+	}
+}
+
+void FloydAlgorithm::k_th_iteration(int k)
+{
+	k_th_iteration(k, 0, quantity_of_vertices);
+}
+
+void FloydAlgorithm::parallel_algorithm()
+{
+	int quantity_of_threads = 4;
+	for (int k = 0; k < quantity_of_vertices; ++k)
+	{
+		vector<thread> threads;
+		int from = 0;
+		int step = quantity_of_vertices / quantity_of_threads;
+		int to = step;
+		while (to <= quantity_of_vertices)
+		{
+			threads.push_back(thread([=] {k_th_iteration(k,from ,to); }));
+			from = to;
+			to += step;
+		}
+		for (int i = 0; i < threads.size(); ++i)
+		{
+			threads[i].join();
+		}
+		W_prev = W_next;
+		theta_prev = theta_next;
 	}
 }
 

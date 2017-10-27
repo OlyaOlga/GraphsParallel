@@ -16,7 +16,9 @@ public:
 	void form_initial_theta(vector<vector<int>>& theta);
 	void printMatrix(vector<vector<int>>& matrix);
 	void algorithm();
+	void k_th_iteration(int k, int from , int to);
 	void k_th_iteration(int k);
+	void parallel_algorithm();
 	vector<vector<int>> get_W();
 	vector<vector<int>> get_theta();
 	~FloydAlgorithm();
