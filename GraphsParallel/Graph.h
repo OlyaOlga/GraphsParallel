@@ -6,11 +6,13 @@ using std::istream;
 
 class DijkstraAlgorithm;
 class FloydAlgorithm;
+class PrimsAlgorithm;
 class Graph
 {
 private:
 	friend class DijkstraAlgorithm;
 	friend class FloydAlgorithm;
+	friend class PrimsAlgorithm;
 	int** matrix;
 	int quantity_of_vertices;
 	void initialize_matrix();

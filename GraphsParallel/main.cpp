@@ -5,13 +5,13 @@
 #include "Graph.h"
 #include "DijkstraAlgorithm.h"
 #include "FloydAlgorithm.h"
+#include "PrimsAlgorithm.h"
 using namespace std;
 
 void Dijkstra()
 {
 	cout << "Dijkstra" << endl;
 	Graph randomGraph(2000);
-	cout << "filled" << endl;
 	DijkstraAlgorithm dijkstra(randomGraph, 0);
 	int time = clock();
 	dijkstra.algorithm();
@@ -24,7 +24,7 @@ void Dijkstra()
 	successiveAlg.algorithm();
 	another_time = clock();
 	cout << "not parallel: " << another_time - time << endl;
-	system("pause");
+	cout << endl;
 }
 
 void Floyd()
@@ -42,10 +42,32 @@ void Floyd()
 	sucsessive.algorithm();
 	another_time = clock();
 	cout << "not parallel: " << another_time - time << endl;
-	system("pause");
+	cout << endl;
 }
 
-void main()
+void Prim()
 {
-	
+	Graph gr(100);
+	cout << "Prims algorithm:" << endl;
+	PrimsAlgorithm prim(gr);
+	int time = clock();
+	prim.parallel_algorithm();
+	int another_time = clock();
+	cout << "parallel: " << another_time - time << endl;
+	cout << endl;
+
+	PrimsAlgorithm succsessive(gr);
+	time = clock();
+	succsessive.algorithm();
+	another_time = clock();
+	cout << "not parallel: " << another_time - time << endl;
+	cout << endl;
+}
+
+void main() 
+{
+	Dijkstra();
+	Floyd();
+	Prim();
+	system("pause");
 }
